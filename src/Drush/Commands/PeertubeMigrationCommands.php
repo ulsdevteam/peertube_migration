@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\peertube_migration\Drush\Commands;
+namespace Drupal\peertube_migration\Commands;
 
 use Consolidation\OutputFormatters\StructuredData\RowsOfFields;
 use Drupal\Core\Utility\Token;
