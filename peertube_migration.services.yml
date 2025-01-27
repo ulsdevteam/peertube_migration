@@ -1,5 +1,6 @@
-peertube_migration.commands:
-  class: \Drupal\peertube_migration\Commands\PeertubeMigrationCommands
-  tags:
-    - { name: drush.command }
-  arguments: ['@entity_type.manager','@logger.factory']
+services:
+  peertube_migration.commands:
+    class: \Drupal\peertube_migration\Commands\PeertubeMigrationCommands
+    tags:
+      - { name: drush.command }
+    arguments: ['@entity_type.manager','@logger.factory']
