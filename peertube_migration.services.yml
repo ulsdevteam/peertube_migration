@@ -3,4 +3,3 @@ services:
     class: \Drupal\peertube_migration\Commands\PeertubeMigrationCommands
     tags:
       - { name: drush.command }
-    arguments: ['@entity_type.manager','@logger.factory']
