@@ -1,5 +1,5 @@
 {
-    "name": "ulsdevteam/peertube_migration",
+    "name": "drupal/peertube_migration",
     "description": "Module for migrating peertube content to Drupal",
     "license": "MIT",
     "type": "drupal-module"
