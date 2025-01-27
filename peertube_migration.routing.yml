@@ -1,0 +1,7 @@
+peertube_migration.config_form:
+  path: '/admin/config/peertube_migration'
+  defaults:
+    _form: '\Drupal\peertube_migration\Form\peertube_migrationForm'
+    _title: 'Peertube Migration Settings'
+  requirements:
+    _permission: 'administer site configuration'
