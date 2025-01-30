@@ -25,8 +25,8 @@ final class PeertubeMigrationCommands extends DrushCommands {
    * Constructs a PeertubeMigrationCommands object.
    */
   public function __construct(
-    private readonly Token $token,
-    peertube_migration_session $session
+    // private readonly Token $token,
+    // peertube_migration_session $session
   ) {
     parent::__construct();
     $this->session = $session;
