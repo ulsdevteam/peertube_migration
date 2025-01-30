@@ -15,21 +15,21 @@ use Drupal\peertube_migration\peertube_migration_session;
 final class PeertubeMigrationCommands extends DrushCommands {
 
   /**
-   * The Peertube migration session service.
+   * Batch Update Builder.
    *
-   * @var \Drupal\peertube_migration\peertube_migration_session
+   * @var \Drupal\peertube_migration\BatchUpdateBuilder
    */
-  private peertube_migration_session $session;
+  protected $batchUpdateBuilder;
+
 
   /**
-   * Constructs a PeertubeMigrationCommands object.
+   * Constructor.
+   *
+   * @param \Drupal\peertube_migration\BatchUpdateBuilder $bub
+   *   The class responsible for building batch updates for processing.
    */
-  public function __construct(
-    // private readonly Token $token,
-    // peertube_migration_session $session
-  ) {
-    parent::__construct();
-    $this->session = $session;
+  public function __construct(BatchUpdateBuilder $bub) {
+    $this->batchUpdateBuilder = $bub;
   }
 
   /**
