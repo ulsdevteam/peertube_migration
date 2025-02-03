@@ -14,7 +14,7 @@ use Drupal\peertube_migration\Form\peertube_migrationForm;
 class BatchUpdateBuilder {
 
     /**
-     * ArchivesSpaceSession that will allow us to issue API requests.
+     * PeertubeMigrationSession that will allow us to issue API requests.
      *
      * @var peertube_migration_session
      */

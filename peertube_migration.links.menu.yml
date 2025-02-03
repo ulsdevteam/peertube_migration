@@ -9,3 +9,9 @@ peertube_migration.peertube_migration_config:
   parent: peertube_migration.settings
   route_name: peertube_migration.config_form
   weight: 10
+
+peertube_migration.peertube_migration.test:
+  title: 'Peertube Migration Testing'
+  parent: system.admin_config_development
+  route_name: peertube_migration.test_form
+  weight: 10

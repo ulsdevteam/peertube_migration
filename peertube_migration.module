@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Provides peertube provider.
+ */
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function peertube_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the peertube module.
+    case 'help.page.peertube':
+      $output = '';
+      $output .= '<h3>' . t('peertube') . '</h3>';
+      $output .= '<p>' . t('This module allows you to add PeerTube videos as Remote videos from the media module in drupal core.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
