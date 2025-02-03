@@ -4,7 +4,7 @@ namespace Drupal\peertube_migration\Test;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Extension\ModuleHandler;
 use Drupal\peertube_migration\peertube_migration_session;
 
 // require_once '../peertube_migration_session.php';
