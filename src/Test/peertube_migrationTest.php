@@ -29,13 +29,20 @@ class peertube_migrationTest extends ConfigFormBase {
      * {@inheritdoc}
      */
     public function buildForm ($form, FormStateInterface $form_state) {
-    $form['button'] = array(
-        '#type' => 'test',
-        '#value' => 'test peertube api call',
-        '#submit' => array('::peertube_test_api')
-    );
-    // return $form;
-    return parent::buildForm($form, $form_state);
+
+        $form['test'] = [
+            '#type' => 'details',
+            '#title' => t('Test Peertube API connection'),
+            '#open' => TRUE,
+        ];
+    
+        $form['test']['button'] = array(
+            '#type' => 'button',
+            '#value' => 'test peertube api call',
+            '#submit' => array('::peertube_test_api')
+        );
+        // return $form;
+        return parent::buildForm($form, $form_state);
     }
 
     /**
@@ -46,7 +53,7 @@ class peertube_migrationTest extends ConfigFormBase {
     parent::submitForm($form, $form_state);
     }
     
-    function peertube_test_api($form, FromStateInterface $form_state) {
+    function peertube_test_api($form, FormStateInterface $form_state) {
         // test api call 
         // create new session to test connection
         $session = new peertube_migration_session();
@@ -62,3 +69,4 @@ class peertube_migrationTest extends ConfigFormBase {
 
 }
 
+?>
