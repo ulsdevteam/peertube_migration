@@ -4,9 +4,12 @@ namespace Drupal\peertube_migration\Test;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\peertube_migration\peertube_migration_session;
 
 require_once '../peertube_migration_session.php';
+
+
 
 class peertube_migrationTest extends ConfigFormBase {
 
@@ -25,6 +28,12 @@ class peertube_migrationTest extends ConfigFormBase {
       'peertube_migration.test_form',
     ];
   }
+
+  public function __construct() {
+    $this->ModuleHandler::loadInclude('peertube_migration' , '.php' , 'peertube_migration_session');
+
+  }
+
 
     /**
      * {@inheritdoc}
@@ -51,6 +60,10 @@ class peertube_migrationTest extends ConfigFormBase {
      */
     public function submitForm(array &$form, FormStateInterface $form_state) {
       // run the test call from here
+
+      
+
+
       $this->peertube_test_api();
       
       parent::submitForm($form, $form_state);
