@@ -7,7 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\peertube_migration\peertube_migration_session;
 
-require_once '../peertube_migration_session.php';
+// require_once '../peertube_migration_session.php';
 
 
 
