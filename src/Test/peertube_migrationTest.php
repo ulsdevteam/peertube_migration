@@ -30,8 +30,8 @@ class peertube_migrationTest extends ConfigFormBase {
   }
 
   public function __construct() {
-    $this->ModuleHandler::loadInclude('peertube_migration' , '.php' , 'peertube_migration_session');
-
+    $ModulerHandler = new ModuleHandler();
+    $ModulerHandler->loadInclude('peertube_migration' , '.php' , 'peertube_migration_session');
   }
 
 
