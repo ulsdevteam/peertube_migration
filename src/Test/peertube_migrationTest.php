@@ -6,6 +6,7 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\peertube_migration\peertube_migration_session;
 
+require_once '../peertube_migration_session.php';
 
 class peertube_migrationTest extends ConfigFormBase {
 
@@ -49,11 +50,13 @@ class peertube_migrationTest extends ConfigFormBase {
      * {@inheritdoc}
      */
     public function submitForm(array &$form, FormStateInterface $form_state) {
-    // run the test call from here
-    parent::submitForm($form, $form_state);
+      // run the test call from here
+      $this->peertube_test_api();
+      
+      parent::submitForm($form, $form_state);
     }
     
-    function peertube_test_api($form, FormStateInterface $form_state) {
+    function peertube_test_api() {
         // test api call 
         // create new session to test connection
         $session = new peertube_migration_session();
