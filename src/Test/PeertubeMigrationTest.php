@@ -43,9 +43,9 @@ class PeertubeMigrationTest extends ConfigFormBase {
         ];
     
         $form['test']['button'] = array(
-            '#type' => 'button',
+            '#type' => 'submit',
             '#value' => 'Test the Peertube API Call',
-            '#submit' => array('::peertubeTestApi')
+            '#submit' => ['::peertubeTestApi'],
         );
         // return $form;
         return parent::buildForm($form, $form_state);
