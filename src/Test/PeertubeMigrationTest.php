@@ -64,9 +64,9 @@ class PeertubeMigrationTest extends ConfigFormBase {
     public function peertubeTestApi() {
       // test api call 
       // create new session to test connection
-      $session = new PeertubeMigrationSession();
+      // $session = new PeertubeMigrationSession();
 
-      // $session = \Drupal::service('peertube_migration.peertube_migration_session');
+      $session = \Drupal::service('peertube_migration.peertube_migration_session');
 
       try {
           // try logging and getting ID

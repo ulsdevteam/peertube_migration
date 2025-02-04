@@ -14,11 +14,7 @@ class PeertubeMigrationSession {
    *
    * @var array
    */
-  protected $connectionInfo = [
-    'base_uri' => \Drupal::state()->get('peertube_migration.base_uri'),
-    'username' => \Drupal::state()->get('peertube_migration.username'),
-    'password' => \Drupal::state()->get('peertube_migration.password'),
-  ];
+  protected $connectionInfo = [];
 
   /**
    * Session ID.
@@ -28,9 +24,36 @@ class PeertubeMigrationSession {
   protected $session = '';
 
   /**
-   * {@inheritdoc}
+   *  The Guzzle HTTP client
+   * 
+   * @var \GuzzleHttp\Client
    */
-  public function __construct() {
+  protected $httpClient;
+
+  /**
+   * The State service
+   * 
+   * @var \Drupal\Core\State\StateInterface
+   */
+  protected $state;
+
+  /**
+   * PeertubeMigrationSession Constructor
+   * 
+   * @param \GuzzleHttp\Client $http_client
+   *  The Guzzle Http client
+   * @param \Drupal\Core\State\StateInterface $state
+   *  The State service
+   */
+  public function __construct(Client $http_client, StateInterface $state) {
+    $this->httpClient = $http_client;
+    $this->state = $state;
+
+    $this->connectionInfo = [
+      'base_uri' => $this->state->get('peertube_migration.base_uri'),
+      'username' => $this->state->get('peertube_migration.username'),
+      'password' => $this->state->get('peertube_migration.password'),  
+    ];
   }
 
   /**
