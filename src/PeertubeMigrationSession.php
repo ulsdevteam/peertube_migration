@@ -110,24 +110,30 @@ class PeertubeMigrationSession {
 
     // get the client ID and client secret
     $oauth_url = '/api/v1/oauth-clients/local';
-    $client = new Client(['base_uri' => $this->connectionInfo['base_uri'],
-                          'timeout' => 120,
-                          'debug' => true,
-                        ]);
+    // $client = new Client(['base_uri' => $this->connectionInfo['base_uri'],
+    //                       'timeout' => 120,
+    //                       'debug' => true,
+    //                     ]);
 
     try {
+
+      $response = $this->httpClient->get($oauth_url, [
+        'base_uri' => $this->connectionInfo['base_uri'],
+        'timeout' => 120,
+        'debug' => true,
+      ]);
 
       // $response = $client->get('/api/v1/version');
       \Drupal::logger('peertube_migration')->notice('sending request now..');
 
-      $response = $client->get($oauth_url);
+      // $response = $client->get($oauth_url);
       $data = json_decode($response->getBody(), TRUE);
       $client_id = $data['client_id'];
       $client_secret = $data['client_secret'];
 
       \Drupal::logger('peertube_migration')->notice('Client id is: ' . $client_id);
 
-      // rewquest the access token
+      // request the access token
       $login_url = '/api/v1/users/token';
       $login_data = [
         'client_id' => $client_id,
