@@ -5,14 +5,14 @@ namespace Drupal\peertube_migration\Test;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Extension\ModuleHandler;
-use Drupal\peertube_migration\peertube_migration_session;
+use Drupal\peertube_migration\PeertubeMigrationSession;
 
-// require_once '../peertube_migration_session.php';
+// require_once '../PeertubeMigrationSession.php';
 
-$ModulerHandler =\Drupal::service('module_handler');
-$ModulerHandler->loadInclude('peertube_migration' , '.php' , 'peertube_migration_session');
+$ModulerHandler = \Drupal::service('module_handler');
+$ModulerHandler->loadInclude('peertube_migration' , 'php' , 'peertube_migration_session');
 
-class peertube_migrationTest extends ConfigFormBase {
+class PeertubeMigrationTest extends ConfigFormBase {
 
   /**
    * {@inheritdoc}
@@ -44,8 +44,8 @@ class peertube_migrationTest extends ConfigFormBase {
     
         $form['test']['button'] = array(
             '#type' => 'button',
-            '#value' => 'test peertube api call',
-            '#submit' => array('::peertube_test_api')
+            '#value' => 'Test the Peertube API Call',
+            '#submit' => array('::peertubeTestApi')
         );
         // return $form;
         return parent::buildForm($form, $form_state);
@@ -60,25 +60,26 @@ class peertube_migrationTest extends ConfigFormBase {
       
 
 
-      $this->peertube_test_api();
+      $this->peertubeTestApi();
       
       parent::submitForm($form, $form_state);
     }
     
-    function peertube_test_api() {
-        // test api call 
-        // create new session to test connection
-        // $session = new peertube_migration_session();
+    public function peertubeTestApi() {
+      // test api call 
+      // create new session to test connection
+      // $session = new PeertubeMigrationSession();
 
-        $session = \Drupal::service('peertube_migration.peertube_migration_session');
+      $session = \Drupal::service('peertube_migration.PeertubeMigrationSession');
 
-        try {
-            // try logging and getting ID
-            $session_id = $session->getSession();
-            \Drupal::logger('peertube_migration')->notice('API SUCCESS!! session ID: ' . $session_id);
-        } catch (\Exception $e) {
-            \Drupal::logger('peertube_migration')->notice('Issue retrieving session id with error: ' . $e);
-        }
+      try {
+          // try logging and getting ID
+          $session_id = $session->getSession();
+          \Drupal::logger('peertube_migration')->notice('API SUCCESS!! session ID: ' . $session_id);
+      } catch (\Exception $e) {
+          \Drupal::logger('peertube_migration')->notice('Issue retrieving session id with error: ' . $e);
+      }
+
     }
 
 }

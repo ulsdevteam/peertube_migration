@@ -10,7 +10,7 @@ class peertube_migration_Iterator implements \Countable, \Iterator {
   /**
    * peertube_migration Session object.
    *
-   * @var Drupal\peertube_migration\peertube_migration_session
+   * @var Drupal\peertube_migration\PeertubeMigrationSession
    */
   protected $session;
 
@@ -105,7 +105,7 @@ class peertube_migration_Iterator implements \Countable, \Iterator {
   /**
    * {@inheritdoc}
    */
-  public function __construct(string $type, peertube_migration_Session $session, string $repository) {
+  public function __construct(string $type, PeertubeMigrationSession $session, string $repository) {
     if (!in_array($type, $this->types)) {
       throw new \InvalidArgumentException('Can\'t iterate over type: ' . $type);
     }
