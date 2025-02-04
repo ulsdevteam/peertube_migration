@@ -7,7 +7,7 @@ use GuzzleHttp\Client;
 /**
  * An peertube_migration authenticated session object.
  */
-class peertube_migration_session {
+class PeertubeMigrationSession {
 
   /**
    * Connection Information.
@@ -65,7 +65,7 @@ class peertube_migration_session {
   /**
    * Either logs in or returns the current session.
    *
-   * @return peertube_migration_session
+   * @return PeertubeMigrationSession
    *   The peertube_migration session object
    */
   public function getSession() {
