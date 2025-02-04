@@ -144,9 +144,9 @@ class PeertubeMigrationSession {
         'response_type' => 'code',
       ];
 
-      $response = $client->post($login_url, ['form_params' => $login_data]);
+      $response = $this->httpClient->post($login_url, ['form_params' => $login_data]);
 
-      \Drupal::logger('peertube_migration')->error('Response: ' . $response->getBody());
+      \Drupal::logger('peertube_migration')->notice('Response: ' . $response->getBody());
 
       $login_response = json_decode($response->getBody(), TRUE);
 
