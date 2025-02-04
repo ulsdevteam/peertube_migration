@@ -56,10 +56,6 @@ class PeertubeMigrationTest extends ConfigFormBase {
      */
     public function submitForm(array &$form, FormStateInterface $form_state) {
       // run the test call from here
-
-      
-
-
       $this->peertubeTestApi();
       
       parent::submitForm($form, $form_state);

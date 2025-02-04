@@ -9,7 +9,7 @@ peertube_migration.config_form:
 peertube_migration.test_form:
   path: '/admin/config/development/peertube_migration_test'
   defaults:
-    _form: '\Drupal\peertube_migration\Test\peertube_migrationTest'
+    _form: '\Drupal\peertube_migration\Test\PeertubeMigrationTest'
     _title: 'Peertube Migration Test'
   requirements:
     _permission: 'administer site configuration'
