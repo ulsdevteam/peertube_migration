@@ -2,7 +2,8 @@
 
 namespace Drupal\peertube_migration;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
+use Drupal\Core\State\StateInterface;
 
 /**
  * An peertube_migration authenticated session object.
@@ -26,7 +27,7 @@ class PeertubeMigrationSession {
   /**
    *  The Guzzle HTTP client
    * 
-   * @var \GuzzleHttp\Client
+   * @var \GuzzleHttp\ClientInterface
    */
   protected $httpClient;
 
@@ -40,12 +41,12 @@ class PeertubeMigrationSession {
   /**
    * PeertubeMigrationSession Constructor
    * 
-   * @param \GuzzleHttp\Client $http_client
+   * @param \GuzzleHttp\ClientInterface $http_client
    *  The Guzzle Http client
    * @param \Drupal\Core\State\StateInterface $state
    *  The State service
    */
-  public function __construct(Client $http_client, StateInterface $state) {
+  public function __construct(ClientInterface $http_client, StateInterface $state) {
     $this->httpClient = $http_client;
     $this->state = $state;
 
