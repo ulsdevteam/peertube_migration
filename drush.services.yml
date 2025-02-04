@@ -4,7 +4,3 @@ services:
     tags:
       - { name: drush.command }
     arguments: ['@peertube_migration.batch_update_builder']
-
-  peertube_migration.peertube_migration_session:
-    class: Drupal\peertube_migration\peertube_migration_session
-    arguments: []

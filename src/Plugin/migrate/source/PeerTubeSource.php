@@ -67,7 +67,7 @@ use GuzzleHttp\Psr7\Response;
 namespace Drupal\archivesspace\Plugin\migrate\source;
 
 use Drupal\peertube_migration\peertube_migration_Iterator;
-use Drupal\peertube_migration\peertube_migration_Session;
+use Drupal\peertube_migration\PeertubeMigrationSession;
 use Drupal\migrate\Plugin\migrate\source\SourcePluginBase;
 use Drupal\migrate\Plugin\MigrationInterface;
 
@@ -83,7 +83,7 @@ class peertube_migration_Source extends SourcePluginBase {
   /**
    * ArchivesSpace Session object.
    *
-   * @var Drupal\peertube_migration\peertube_migration_Session
+   * @var Drupal\peertube_migration\PeertubeMigrationSession
    */
   protected $session;
 
@@ -340,14 +340,14 @@ class peertube_migration_Source extends SourcePluginBase {
       $username = ($configuration['username'] ?? '');
       $password = ($configuration['password'] ?? '');
 
-      $this->session = peertube_migration_Session::withConnectionInfo(
+      $this->session = PeertubeMigrationSession::withConnectionInfo(
           $base_uri, $username, $password
         );
 
       // No login info provided by the migration config.
     }
     else {
-      $this->session = new peertube_migration_Session();
+      $this->session = new PeertubeMigrationSession();
     }
 
   }

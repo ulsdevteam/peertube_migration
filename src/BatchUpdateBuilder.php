@@ -16,9 +16,9 @@ class BatchUpdateBuilder {
     /**
      * PeertubeMigrationSession that will allow us to issue API requests.
      *
-     * @var peertube_migration_session
+     * @var PeertubeMigrationSession
      */
-    protected $peertube_migration_session;
+    protected $PeertubeMigrationSession;
 
   /**
    * Constructor to set defaults.
@@ -29,21 +29,21 @@ class BatchUpdateBuilder {
     // Devs can use peertube_migration::withConnectionInfo and the
     // BatchUpdateBuilder->setPeertubeMigrationSession if they want different
     // credentials.
-    $this->peertube_migration_session = new peertube_migration_session();
+    $this->PeertubeMigrationSession = new PeertubeMigrationSession();
   }
 
   /**
    * peertube_migration setter.
    */
-  public function setPeertubeMigrationSession(peertube_migration_session $peertubemigration_session) {
-    $this->peertube_migration_session = $peertubemigration_session;
+  public function setPeertubeMigrationSession(PeertubeMigrationSession $peertubemigration_session) {
+    $this->PeertubeMigrationSession = $peertubemigration_session;
   }
 
   /**
    * PeertubeMigrationSession getter.
    */
   public function getPeertubeMigrationSession() {
-    return $this->peertube_migration_session;
+    return $this->PeertubeMigrationSession;
   }
 
 

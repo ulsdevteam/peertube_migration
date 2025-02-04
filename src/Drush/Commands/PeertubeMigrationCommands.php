@@ -7,7 +7,7 @@ use Drupal\Core\Utility\Token;
 use Drush\Attributes as CLI;
 use Drush\Commands\DrushCommands;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\peertube_migration\peertube_migration_session;
+use Drupal\peertube_migration\PeertubeMigrationSession;
 
 /**
  * A Drush commandfile.
@@ -38,7 +38,7 @@ final class PeertubeMigrationCommands extends DrushCommands {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('token'),
-      $container->get('peertube_migration_session')
+      $container->get('PeertubeMigrationSession')
     );
   }
 
@@ -58,7 +58,7 @@ final class PeertubeMigrationCommands extends DrushCommands {
 
       \Drupal::logger('peertube_migration')->notice('starting a session now...');
 
-      $this->session = peertube_migration_session::withConnectionInfo(
+      $this->session = PeertubeMigrationSession::withConnectionInfo(
         \Drupal::state()->get('peertube_migration.base_uri', 'peertube_migration_base_uri'),
         \Drupal::state()->get('peertube_migration.username'),
         \Drupal::state()->get('peertube_migration.password'),
@@ -99,7 +99,7 @@ final class PeertubeMigrationCommands extends DrushCommands {
   //    /**
   //    * peertube_migration Session object.
   //    *
-  //    * @var Drupal\peertube_migration\peertube_migration_session
+  //    * @var Drupal\peertube_migration\PeertubeMigrationSession
   //    */
   //   $session;
   //   if (login()) {

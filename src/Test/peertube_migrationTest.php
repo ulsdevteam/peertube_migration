@@ -9,8 +9,8 @@ use Drupal\peertube_migration\PeertubeMigrationSession;
 
 // require_once '../PeertubeMigrationSession.php';
 
-$ModulerHandler = \Drupal::service('module_handler');
-$ModulerHandler->loadInclude('peertube_migration' , 'php' , 'peertube_migration_session');
+// $ModulerHandler = \Drupal::service('module_handler');
+// $ModulerHandler->loadInclude('peertube_migration' , 'php' , 'peertube_migration_session');
 
 class PeertubeMigrationTest extends ConfigFormBase {
 
