@@ -9,8 +9,8 @@ use Drupal\peertube_migration\peertube_migration_session;
 
 // require_once '../peertube_migration_session.php';
 
-$ModulerHandler = new ModuleHandler();
-$ModulerHandler->loadInclude('peertube_migration' , '.php' , 'peertube_migration_session');
+// $ModulerHandler = new ModuleHandler();
+// $ModulerHandler->loadInclude('peertube_migration' , '.php' , 'peertube_migration_session');
 
 class peertube_migrationTest extends ConfigFormBase {
 
@@ -68,7 +68,9 @@ class peertube_migrationTest extends ConfigFormBase {
     function peertube_test_api() {
         // test api call 
         // create new session to test connection
-        $session = new peertube_migration_session();
+        // $session = new peertube_migration_session();
+
+        $session = \Drupal::service('peertube_migration.peertube_migration_session');
 
         try {
             // try logging and getting ID

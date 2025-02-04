@@ -1,0 +1,4 @@
+services:
+  peertube_migration.peertube_migration_session:
+    class: Drupal\peertube_migration\peertube_migration_session
+    arguments: []
