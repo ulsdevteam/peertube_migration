@@ -47,7 +47,7 @@ class PeertubeMigrationSession {
    *  The State service
    */
   public function __construct(ClientInterface $http_client, StateInterface $state) {
-    $this->httpClient = $http_client;
+    
     $this->state = $state;
 
     $this->connectionInfo = [
@@ -55,6 +55,9 @@ class PeertubeMigrationSession {
       'username' => $this->state->get('peertube_migration.username'),
       'password' => $this->state->get('peertube_migration.password'),  
     ];
+
+    $this->httpClient = $http_client(['base_uri' => $this->connectionInfo['base_uri']]);
+
   }
 
   /**
@@ -110,7 +113,6 @@ class PeertubeMigrationSession {
 
     // get the client ID and client secret
     $oauth_url = '/api/v1/oauth-clients/local';
-    $this->httpClient(['base_uri' => $this->connectionInfo['base_uri']]);
 
 
     try {
