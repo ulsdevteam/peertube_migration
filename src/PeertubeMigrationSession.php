@@ -44,7 +44,7 @@ class PeertubeMigrationSession {
    * @param \Drupal\Core\State\StateInterface $state
    *  The State service
    */
-  public function __construct( StateInterface $state) {
+  public function __construct(StateInterface $state) {
     
     $this->state = $state;
     // $this->httpClient = $http_client;
@@ -118,11 +118,7 @@ class PeertubeMigrationSession {
 
     try {
 
-      $response = $this->httpClient->get($oauth_url, [
-        'base_uri' => $this->connectionInfo['base_uri'],
-        'timeout' => 120,
-        'debug' => true,
-      ]);
+      $response = $this->httpClient->get($oauth_url);
 
       // $response = $client->get('/api/v1/version');
       \Drupal::logger('peertube_migration')->notice('sending request now..');
@@ -145,9 +141,7 @@ class PeertubeMigrationSession {
         'response_type' => 'code',
       ];
 
-      $response = $this->httpClient->post($login_url, 
-        ['base_uri' => $this->connectionInfo['base_uri']], 
-        ['form_params' => $login_data]);
+      $response = $this->httpClient->post($login_url,  ['form_params' => $login_data]);
 
       \Drupal::logger('peertube_migration')->notice('Response: ' . $response->getBody());
 
