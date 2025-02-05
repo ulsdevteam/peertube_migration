@@ -103,7 +103,9 @@ class PeertubeMigrationSession {
       \Drupal::logger('peertube_migration')->notice('no session found.. logging in now');
       $this->login();
     }
-    \Drupal::logger('peertube_migration')->notice('session already there - returning current session');
+    else {
+      \Drupal::logger('peertube_migration')->notice('session already there - returning current session');
+    }
     return $this->session;
   }
 

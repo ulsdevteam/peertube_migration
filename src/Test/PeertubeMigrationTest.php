@@ -71,6 +71,10 @@ class PeertubeMigrationTest extends ConfigFormBase {
       try {
           // try logging and getting ID
           $session_id = $session->getSession();
+
+          \Drupal::messenger()->addMessage('API Connection Successful! Session ID: ' . $session_id, 'status');
+
+          
           \Drupal::logger('peertube_migration')->notice('API SUCCESS!! session ID: ' . $session_id);
       } catch (\Exception $e) {
           \Drupal::logger('peertube_migration')->notice('Issue retrieving session id with error: ' . $e);
