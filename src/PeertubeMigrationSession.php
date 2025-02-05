@@ -49,14 +49,13 @@ class PeertubeMigrationSession {
   public function __construct(ClientInterface $http_client, StateInterface $state) {
     
     $this->state = $state;
+    $this->httpClient = $http_client;
 
     $this->connectionInfo = [
       'base_uri' => $this->state->get('peertube_migration.base_uri'),
       'username' => $this->state->get('peertube_migration.username'),
       'password' => $this->state->get('peertube_migration.password'),  
     ];
-
-    $this->httpClient = $http_client(['base_uri' => $this->connectionInfo['base_uri']]);
 
   }
 
