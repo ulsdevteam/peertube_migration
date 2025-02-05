@@ -110,10 +110,8 @@ class PeertubeMigrationSession {
 
     // get the client ID and client secret
     $oauth_url = '/api/v1/oauth-clients/local';
-    // $client = new Client(['base_uri' => $this->connectionInfo['base_uri'],
-    //                       'timeout' => 120,
-    //                       'debug' => true,
-    //                     ]);
+    $this->httpClient(['base_uri' => $this->connectionInfo['base_uri']]);
+
 
     try {
 
@@ -144,7 +142,9 @@ class PeertubeMigrationSession {
         'response_type' => 'code',
       ];
 
-      $response = $this->httpClient->post($login_url, ['form_params' => $login_data]);
+      $response = $this->httpClient->post($login_url, 
+        ['base_uri' => $this->connectionInfo['base_uri']], 
+        ['form_params' => $login_data]);
 
       \Drupal::logger('peertube_migration')->notice('Response: ' . $response->getBody());
 
