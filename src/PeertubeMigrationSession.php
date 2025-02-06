@@ -41,12 +41,10 @@ class PeertubeMigrationSession {
   /**
    * PeertubeMigrationSession Constructor
    * 
-   * @param \Drupal\Core\State\StateInterface $state
-   *  The State service
    */
-  public function __construct(StateInterface $state) {
+  public function __construct() {
     
-    $this->state = $state;
+    $this->state = \Drupal::state();
     // $this->httpClient = $http_client;
 
     $this->connectionInfo = [
@@ -122,7 +120,7 @@ class PeertubeMigrationSession {
 
       $response = $this->httpClient->get($oauth_url);
 
-      // $response = $client->get('/api/v1/version');
+      
       \Drupal::logger('peertube_migration')->notice('sending request now..');
 
       // $response = $client->get($oauth_url);
@@ -190,10 +188,10 @@ class PeertubeMigrationSession {
       $this->login();
     }
 
-    $client = new Client(['base_uri' => $this->connectionInfo['base_uri']]);
+    // $client = new Client(['base_uri' => $this->connectionInfo['base_uri']]);
     $request_data = [
       'headers' => [
-        'X-peertube-migration-Session' => $this->session,
+        'Authorization' => $this->session,
       ],
     ];
 
@@ -206,7 +204,7 @@ class PeertubeMigrationSession {
         break;
     }
 
-    $response = $client->request($type, $path, $request_data);
+    $response = $this->httpClient->request($type, $path, $request_data);
     
     if ($response->getStatusCode() !== 200) {
       \Drupal::logger('peertube_migration')->error('Failed to fetch data: ' . $response->getStatusCode());
