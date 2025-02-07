@@ -80,6 +80,15 @@ class PeertubeMigrationTest extends ConfigFormBase {
           \Drupal::logger('peertube_migration')->notice('Issue retrieving session id with error: ' . $e);
       }
 
+      // request video content from video url
+      $video_url = 'media.library.pitt.edu/w/g5TWqAGeFm5TEcBq72JoSG';
+      $video_id = 'g5TWqAGeFm5TEcBq72JoSG';
+
+      $response = $session->request('GET' , '/api/v1/videos/' , [$video_id] );
+
+      \Drupal::messenger()->addMessage('response to trying to pull video information for ' . $video_id, ' was: ' . $response);
+
+
     }
 
 }

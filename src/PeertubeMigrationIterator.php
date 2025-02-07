@@ -5,7 +5,7 @@ namespace Drupal\peertube_migration;
 /**
  * Manages iteration of peertube_migration API search result sets.
  */
-class peertube_migration_Iterator implements \Countable, \Iterator {
+class PeertubeMigrationIterator implements \Countable, \Iterator {
 
   /**
    * peertube_migration Session object.
@@ -100,7 +100,7 @@ class peertube_migration_Iterator implements \Countable, \Iterator {
    *
    * @var int
    */
-  protected $pageSize = 250;
+  protected $pageSize = 100;
 
   /**
    * {@inheritdoc}

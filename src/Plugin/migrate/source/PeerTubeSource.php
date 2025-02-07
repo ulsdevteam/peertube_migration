@@ -2,7 +2,7 @@
 
 namespace Drupal\archivesspace\Plugin\migrate\source;
 
-use Drupal\peertube_migration\peertube_migration_Iterator;
+use Drupal\peertube_migration\PeertubeMigrationIterator;
 use Drupal\peertube_migration\PeertubeMigrationSession;
 use Drupal\migrate\Plugin\migrate\source\SourcePluginBase;
 use Drupal\migrate\Plugin\MigrationInterface;
@@ -24,7 +24,7 @@ class peertube_migration_Source extends SourcePluginBase {
   protected $session;
 
   /**
-   * Object type we are currently migrating.
+   * Object type we are currently migrating. -- video ID
    *
    * @var string
    */
@@ -296,7 +296,7 @@ class peertube_migration_Source extends SourcePluginBase {
    */
   protected function initializeIterator() {
 
-    return new peertube_migration_Iterator($this->objectType, $this->session, $this->repository);
+    return new PeertubeMigrationIterator($this->objectType, $this->session, $this->repository);
 
   }
 

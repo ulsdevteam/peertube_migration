@@ -4,6 +4,9 @@ namespace Drupal\peertube_migration;
 
 use GuzzleHttp\Client;
 use Drupal\Core\State\StateInterface;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Handler\CurlHandler;
 
 /**
  * An peertube_migration authenticated session object.
@@ -115,7 +118,6 @@ class PeertubeMigrationSession {
     // get the client ID and client secret
     $oauth_url = '/api/v1/oauth-clients/local';
 
-
     try {
 
       $response = $this->httpClient->get($oauth_url);
@@ -189,10 +191,11 @@ class PeertubeMigrationSession {
     }
 
     // $client = new Client(['base_uri' => $this->connectionInfo['base_uri']]);
-    $request_data = [
-      'headers' => [
-        'Authorization' => $this->session,
-      ],
+    // adding authorization header as separate header
+    $headers = [
+      'username' => $this->connectionInfo['username'],
+      'password' => $this->connectionInfo['password'],
+      'Authorization' => $this->session,
     ];
 
     switch ($type) {
