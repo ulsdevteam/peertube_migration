@@ -82,7 +82,7 @@ class PeertubeMigrationTest extends ConfigFormBase {
 
       // request video captions from video url
       $video_url = 'media.library.pitt.edu/w/g5TWqAGeFm5TEcBq72JoSG';
-      $video_id = 'g5TWqAGeFm5TEcBq72JoSG';
+      $video_id = '7YA55ipVYPydKPdETbMZfJ';
 
       $response = $session->request('GET' , "/api/v1/videos/$video_id/captions");
 

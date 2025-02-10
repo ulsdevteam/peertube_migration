@@ -7,6 +7,7 @@ use Drupal\Core\State\StateInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Handler\CurlHandler;
+use GuzzleHttp\Exception\GuzzleException;
 
 /**
  * An peertube_migration authenticated session object.
