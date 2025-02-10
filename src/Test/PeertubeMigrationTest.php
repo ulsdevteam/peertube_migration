@@ -84,7 +84,7 @@ class PeertubeMigrationTest extends ConfigFormBase {
       $video_url = 'media.library.pitt.edu/w/g5TWqAGeFm5TEcBq72JoSG';
       $video_id = 'g5TWqAGeFm5TEcBq72JoSG';
 
-      $response = $session->request('GET' , "/api/v1/videos/{$video_id}/captions");
+      $response = $session->request('GET' , "/api/v1/videos/$video_id/captions");
 
 
       \Drupal::messenger()->addMessage('response to trying to pull video information for ' . $video_id, ' was: ' . $response['captionPath']);
