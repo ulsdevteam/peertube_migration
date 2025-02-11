@@ -89,7 +89,7 @@ class PeertubeMigrationTest extends ConfigFormBase {
       // $json_response = json_decode($response->getBody(), TRUE);
 
 
-      \Drupal::messenger()->addMessage('response to trying to pull video information for ' . $video_id, ' was: ' . $response);
+      \Drupal::messenger()->addMessage('response to trying to pull video information for ' . $video_id, ' was: ' . $response['data']['captionPath']);
 
 
     }
