@@ -91,6 +91,7 @@ class PeertubeMigrationTest extends ConfigFormBase {
       $storage = \Drupal::entityTypeManager()->getStorage('node');
 
       $query = \Drupal::entityQuery('node')
+        ->accessCheck(FALSE)
         ->condition('nid', 16581)->execute();
 
       $constant_object = $storage->loadMultiple($query);
