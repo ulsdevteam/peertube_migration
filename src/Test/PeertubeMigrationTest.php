@@ -90,7 +90,7 @@ class PeertubeMigrationTest extends ConfigFormBase {
 
       $storage = \Drupal::entityTypeManager()->getStorage('node');
       $node = $storage->load(16581);
-      $label = $node->label();
+      $label = $node->toUrl();
 
       $query = \Drupal::entityQuery('node')
         ->accessCheck(FALSE)
