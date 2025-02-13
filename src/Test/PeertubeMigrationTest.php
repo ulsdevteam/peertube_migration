@@ -88,9 +88,9 @@ class PeertubeMigrationTest extends ConfigFormBase {
       $video_url = 'media.library.pitt.edu/w/g5TWqAGeFm5TEcBq72JoSG';
       $video_id = '7YA55ipVYPydKPdETbMZfJ';
 
-      $storage = \Drupal::entityTypeManager()->getStorage('node');
-      $node = $storage->load(16581);
-      $label = $node->label();
+      $storage = \Drupal::entityTypeManager()->getStorage('media');
+      $media = $storage->load(77827);
+      $label = $media->label();
 
       $query = \Drupal::entityQuery('node')
         ->accessCheck(FALSE)
@@ -100,7 +100,7 @@ class PeertubeMigrationTest extends ConfigFormBase {
 
       // $label = (($constant_object->'16581')['entityKeys']['label']);
 
-      \Drupal::messenger()->addMessage('query response to node 16581: ' . $label, 'status');
+      \Drupal::messenger()->addMessage('query response to media 77827: ' . $label, 'status');
 
       $response = $session->request('GET' , "/api/v1/videos/$video_id/captions");
       // $data = $response->getBody()->getContents();
