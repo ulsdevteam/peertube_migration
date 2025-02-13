@@ -6,6 +6,10 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Extension\ModuleHandler;
 use Drupal\peertube_migration\PeertubeMigrationSession;
+use Drupal\Core\Entity\Query;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\Query\QueryInterface;
+
 
 // require_once '../PeertubeMigrationSession.php';
 
@@ -83,6 +87,15 @@ class PeertubeMigrationTest extends ConfigFormBase {
       // request video captions from video url
       $video_url = 'media.library.pitt.edu/w/g5TWqAGeFm5TEcBq72JoSG';
       $video_id = '7YA55ipVYPydKPdETbMZfJ';
+
+      $storage = \Drupal::entityTypeManager()->getStorage('node');
+
+      $query = \Drupal::entityQuery('node')
+        ->condition('nid', 16581)->execute();
+
+      $constant_object = $storage->loadMultiple($query);
+
+      \Drupal::messenger()->addMessage('query response to node 16581: ' . $constant_object, 'status');
 
       $response = $session->request('GET' , "/api/v1/videos/$video_id/captions");
       // $data = $response->getBody()->getContents();

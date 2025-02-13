@@ -11,7 +11,7 @@ label: 'peertube videos'
 
 source:
   plugin: peertube_migration
-  object_type: shortUID
+  object_type: video_id
   base_uri: ''
   repository: 
   username: admin
