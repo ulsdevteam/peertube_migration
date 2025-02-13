@@ -89,14 +89,16 @@ class PeertubeMigrationTest extends ConfigFormBase {
       $video_id = '7YA55ipVYPydKPdETbMZfJ';
 
       $storage = \Drupal::entityTypeManager()->getStorage('node');
+      $node = $storage->load(16581);
+      $label = $node->get('label')->value;
 
       $query = \Drupal::entityQuery('node')
         ->accessCheck(FALSE)
         ->condition('nid', 16581)->execute();
 
-      $constant_object = $storage->loadMultiple($query);
+      // $constant_object = $storage->loadMultiple($query);
 
-      $label = (($constant_object->'16581')['entityKeys']['label']);
+      // $label = (($constant_object->'16581')['entityKeys']['label']);
 
       \Drupal::messenger()->addMessage('query response to node 16581: ' . $label, 'status');
 
