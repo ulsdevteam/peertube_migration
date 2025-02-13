@@ -96,7 +96,7 @@ class PeertubeMigrationTest extends ConfigFormBase {
 
       $constant_object = $storage->loadMultiple($query);
 
-      \Drupal::messenger()->addMessage('query response to node 16581: ' . $constant_object, 'status');
+      \Drupal::messenger()->addMessage('query response to node 16581: ' . $constant_object[16581]['entityKeys']['label'], 'status');
 
       $response = $session->request('GET' , "/api/v1/videos/$video_id/captions");
       // $data = $response->getBody()->getContents();
