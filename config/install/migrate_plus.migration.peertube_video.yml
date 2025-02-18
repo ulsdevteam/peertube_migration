@@ -10,14 +10,29 @@ migration_tags: null
 label: 'peertube videos'
 
 source:
-  plugin: peertube_migration
-  object_type: video_id
-  base_uri: ''
-  repository: 
-  username: admin
-  password: admin
-  keys:
-    - uri
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  urls: https://136-142-230-92-digital.traefik.me/jsonapi/node/article
+  ids:
+    nid:
+      type: integer
+  item_selector: data/
+  fields:
+    -
+      name: nid
+      label: 'Nid'
+      selector: /attributes/nid
+    -
+      name: vid
+      label: 'Vid'
+      selector: /attributes/vid
+    -
+      name: uuid
+      label: 'Uuid'
+      selector: /attributes/uuid
+  constants:
+    source_base_path: 'https://136-142-230-92-digital.traefik.me/'
   
 process:
   uid:
@@ -25,7 +40,7 @@ process:
     default_value: peertube_video_short_uid
 
 destination: 
-  plugin: 'entity:node'
+  plugin: 'entity:media'
   bundle: peertube_id
 
 migration_dependencies: null
