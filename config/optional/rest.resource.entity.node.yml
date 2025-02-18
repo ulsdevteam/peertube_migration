@@ -1,0 +1,14 @@
+id: entity.node
+plugin_id: 'entity:node'
+granularity: method
+configuration:
+  GET:
+    supported_formats:
+      - json
+    supported_auth:
+      - basic_auth
+      - cookie
+dependency:
+  enforced:
+    module:
+      - peertube_migration
