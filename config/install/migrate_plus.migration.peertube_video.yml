@@ -38,6 +38,7 @@ process:
   uid:
     plugin: default_value
     default_value: peertube_video_short_uid
+  nid: nid
 
 destination: 
   plugin: 'entity:media'
