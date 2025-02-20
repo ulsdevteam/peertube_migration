@@ -13,7 +13,7 @@ source:
   plugin: url
   data_fetcher_plugin: http
   data_parser_plugin: json
-  urls: https://136-142-230-92-digital.traefik.me/jsonapi/node/media
+  urls: https://136-142-230-92-digital.traefik.me/jsonapi/node/islandora_object
   ids:
     nid:
       type: integer
