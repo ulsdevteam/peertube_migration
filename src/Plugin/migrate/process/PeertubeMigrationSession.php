@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\peertube_migration;
+namespace Drupal\peertube_migration\Plugin\migrate\process;
 
 use GuzzleHttp\Client;
 use Drupal\Core\State\StateInterface;

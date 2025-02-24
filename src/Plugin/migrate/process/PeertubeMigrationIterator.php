@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\peertube_migration;
+namespace Drupal\peertube_migration\Plugin\migrate\process;
 
 /**
  * Manages iteration of peertube_migration API search result sets.

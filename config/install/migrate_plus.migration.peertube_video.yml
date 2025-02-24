@@ -40,8 +40,18 @@ process:
     default_value: peertube_video_short_uid
   nid: nid
 
+  uri:
+  -
+    plugin: peertube_api
+    source: uuid
+  -
+    plugin: download
+    source:
+      - destination_uri
+    file_exists: rename
+
 destination: 
-  plugin: 'entity:media'
-  bundle: peertube_id
+  plugin: 'entity:file'
+  bundle: peertube_caption
 
 migration_dependencies: null
