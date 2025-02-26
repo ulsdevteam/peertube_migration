@@ -13,45 +13,79 @@ source:
   plugin: url
   data_fetcher_plugin: http
   data_parser_plugin: json
-  urls: https://136-142-230-92-digital.traefik.me/jsonapi/node/islandora_object?filter[uid.name][value]=emv38
-  ids:
-    nid:
-      type: integer
+  urls: https://136-142-230-92-digital.traefik.me/jsonapi/media/remote_video?filter[uid.name][value]=emv38
+
   item_selector: data/
   fields:
     -
+      name: field_media_oembed_video
+      label: 'field_media_oembed_video'
+      selector: /attributes/field_media_oembed_video
+    -
       name: nid
-      label: 'Nid'
-      selector: /attributes/nid
+      label: 'drupal_internal__target_id'
+      selector: /relationships/field_media_of/data/meta/drupal_internal__target_id
     -
-      name: vid
-      label: 'Vid'
-      selector: /attributes/vid
+      name: node_id
+      label: 'node_id'
+      selector: /relationships/field_media_of/data/id
     -
-      name: uuid
-      label: 'Uuid'
-      selector: /attributes/uuid
+      name: id
+      label: 'id'
+      selector: /id
+    
+  ids:
+    id:
+      type: string
+
   constants:
     source_base_path: 'https://136-142-230-92-digital.traefik.me/'
+    DRUPAL_FILE_DIRECTORY: 'public://transcripts'
   
 process:
-  uid:
-    plugin: default_value
-    default_value: peertube_video_short_uid
-  nid: nid
 
-  uri:
-  -
+  caption_path:
     plugin: peertube_api
-    source: uuid
-  -
-    plugin: download
+    source: field_media_oembed_video
+
+  destination_file_name:
+    -
+      plugin: callback
+      callable: basename
+      source: nid
+    -
+      plugin: skip_on_empty
+      method: row
+      message: 'cannot import empty file name'
+
+  source_uri:
+    -
+      plugin: concat
+      delimiter: '/'
+      source:
+        - 'https://media.library.pitt.edu/lazy-static/video-captions'
+        - '@caption_path'
+    -
+      plugin: urlencode
+  
+  destination_uri:
+    -
+      plugin: concat
+      source:
+        - constants/DRUPAL_FILE_DIRECTORY
+        - '@destination_file_name'
+    -
+      plugin: urlencode
+  
+  uri:
+    plugin: file_copy
     source:
-      - destination_uri
+      - '@source_uri'
+      - '@destination_uri'
     file_exists: rename
+    move: FALSE
 
 destination: 
   plugin: 'entity:file'
-  bundle: peertube_caption
 
 migration_dependencies: null
