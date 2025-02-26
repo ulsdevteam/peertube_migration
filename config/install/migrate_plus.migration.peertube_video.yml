@@ -33,6 +33,10 @@ source:
       name: id
       label: 'id'
       selector: /id
+    -
+      name: name
+      label: 'name'
+      selector: /attributes/name
     
   ids:
     id:
@@ -52,7 +56,7 @@ process:
     -
       plugin: callback
       callable: basename
-      source: nid
+      source: name
     -
       plugin: skip_on_empty
       method: row
