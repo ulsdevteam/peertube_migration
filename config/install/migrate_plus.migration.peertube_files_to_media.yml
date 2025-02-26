@@ -1,0 +1,21 @@
+id: peertube_files_to_media
+migration_tags:
+  - files
+label: 'migrate .vtt files to media'
+
+source:
+
+
+
+
+
+process:
+
+
+
+destination:
+  plugin: 'entity:media'
+
+migration_dependencies:
+  required:
+    - peertube_video
