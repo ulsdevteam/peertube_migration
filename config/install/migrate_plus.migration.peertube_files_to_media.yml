@@ -3,10 +3,43 @@ migration_tags:
   - files
 label: 'migrate .vtt files to media'
 
+
 source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  urls: https://136-142-230-92-digital.traefik.me/jsonapi/media/remote_video?filter[uid.name][value]=emv38
 
+  item_selector: data/
+  fields:
+    -
+      name: field_media_oembed_video
+      label: 'field_media_oembed_video'
+      selector: /attributes/field_media_oembed_video
+    -
+      name: nid
+      label: 'drupal_internal__target_id'
+      selector: /relationships/field_media_of/data/meta/drupal_internal__target_id
+    -
+      name: node_id
+      label: 'node_id'
+      selector: /relationships/field_media_of/data/id
+    -
+      name: id
+      label: 'id'
+      selector: /id
+    -
+      name: name
+      label: 'name'
+      selector: /attributes/name
+    
+  ids:
+    id:
+      type: string
 
-
+  constants:
+    source_base_path: 'https://136-142-230-92-digital.traefik.me/'
+    DRUPAL_FILE_DIRECTORY: 'public://transcripts'
 
 
 process:
