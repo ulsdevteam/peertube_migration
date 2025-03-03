@@ -1,6 +1,0 @@
-services:
-  peertube_migration.commands:
-    class: Drupal\peertube_migration\Drush\Commands\PeertubeMigrationCommands
-    tags:
-      - { name: drush.command }
-    arguments: []
