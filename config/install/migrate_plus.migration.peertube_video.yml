@@ -45,33 +45,33 @@ source:
 
   constants:
     source_base_path: 'https://136-142-230-92-digital.traefik.me/'
-    DRUPAL_FILE_DIRECTORY: 'public://transcripts'
+    DRUPAL_FILE_DIRECTORY: 'public://transcripts/'
+    CAPTION_BASE_PATH: 'https://peertube-dev-01.library.pitt.edu'
+    VTT: '.vtt'
   
 process:
 
   caption_path:
-    plugin: peertube_api
-    source: field_media_oembed_video
+    -
+      plugin: peertube_api
+      source: field_media_oembed_video
 
   destination_file_name:
-    -
-      plugin: callback
-      callable: basename
-      source: name
-    -
-      plugin: skip_on_empty
-      method: row
-      message: 'cannot import empty file name'
+    plugin: concat
+    source:
+      - name
+      - constants/VTT
 
   source_uri:
     -
       plugin: concat
-      delimiter: '/'
       source:
-        - 'https://media.library.pitt.edu/lazy-static/video-captions'
+        - constants/CAPTION_BASE_PATH
         - '@caption_path'
     -
       plugin: urlencode
+    - 
+      plugin: log
   
   destination_uri:
     -
@@ -81,6 +81,8 @@ process:
         - '@destination_file_name'
     -
       plugin: urlencode
+    - 
+      plugin: log
   
   uri:
     plugin: file_copy

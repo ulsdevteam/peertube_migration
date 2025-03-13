@@ -1,4 +1,4 @@
 services:
   peertube_migration.peertube_migration_session:
-    class: Drupal\peertube_migration\Plugin\migrate\process
+    class: Drupal\peertube_migration\Plugin\migrate\process\PeertubeMigrationSession
     arguments: []

@@ -2,7 +2,7 @@ id: peertube_files_to_media
 migration_tags:
   - files
 label: 'migrate .vtt files to media'
-
+migration_group: islandora
 
 source:
   plugin: url
@@ -40,14 +40,45 @@ source:
   constants:
     source_base_path: 'https://136-142-230-92-digital.traefik.me/'
     DRUPAL_FILE_DIRECTORY: 'public://transcripts'
-
+    media_use: 'Transcript'
 
 process:
 
+  field_media_file/target_id:
+    plugin: migration_lookup
+    migration: peertube_video
+    source: id
 
+  thumbnail/target_id:
+    plugin: migration_lookup
+    migration: peertube_video
+    source: id
+  
+  field_media_use:
+    -
+      plugin: entity_lookup
+      source: constants/media_use
+      entity_type: taxonomy_term
+      value_key: name
+      bundle_key: vid
+      bundle: islandora_media_use
+    -
+      plugin: log
+
+  field_media_of: 
+    -
+      plugin: entity_lookup
+      entity_type: node
+      source: name
+      value_key: title
+      bundle: islandora_object
+      access_check: 0
+    -
+      plugin: log
 
 destination:
   plugin: 'entity:media'
+  default_bundle: file
 
 migration_dependencies:
   required:
