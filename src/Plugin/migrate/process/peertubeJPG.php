@@ -13,20 +13,20 @@ use Drupal\peertube_migration\Plugin\migrate\process\PeertubeMigrationSession;
  * pull video link from peertube based on media node from drupal
  *
  * @MigrateProcessPlugin(
- *   id = "peertube_api"
+ *   id = "peertube_jpg"
  * )
  *
  * To do custom value transformations use the following:
  *
  * @code
  * field_text:
- *   plugin: peertube_api
+ *   plugin: peertube_jpg
  *   source: text
  * @endcode
  *
  */
 
-class PeertubeAPI extends ProcessPluginBase {
+class peertubeJPG extends ProcessPluginBase {
 
 
   /**
@@ -48,11 +48,11 @@ class PeertubeAPI extends ProcessPluginBase {
     // make a request to peertube API
     $session = \Drupal::service('peertube_migration.peertube_migration_session');
 
-    //get video caption link
-    $response = $session->request('GET' , "/api/v1/videos/$video_id/captions");
+    //get video thumbnail link
+    $response = $session->request('GET' , "/api/v1/videos/$video_id");
 
-    // return ending of caption path
-    return $response['data'][0]['captionPath'];
+    // return ending of thumbnail path
+    return $response['thumbnailPath'];
   }
     
 }

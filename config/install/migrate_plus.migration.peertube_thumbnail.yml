@@ -1,0 +1,99 @@
+langcode: en
+status: true
+dependencies: { }
+id: peertube_thumbnail
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: islandora
+
+label: 'importing video thumbnail jpgs from peertube'
+
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  urls: https://136-142-230-92-digital.traefik.me/jsonapi/media/remote_video?filter[uid.name][value]=emv38
+
+  item_selector: data/
+  fields:
+    -
+      name: field_media_oembed_video
+      label: 'field_media_oembed_video'
+      selector: /attributes/field_media_oembed_video
+    -
+      name: nid
+      label: 'drupal_internal__target_id'
+      selector: /relationships/field_media_of/data/meta/drupal_internal__target_id
+    -
+      name: node_id
+      label: 'node_id'
+      selector: /relationships/field_media_of/data/id
+    -
+      name: id
+      label: 'id'
+      selector: /id
+    -
+      name: name
+      label: 'name'
+      selector: /attributes/name
+    
+  ids:
+    id:
+      type: string
+
+  constants:
+    source_base_path: 'https://136-142-230-92-digital.traefik.me/'
+    DRUPAL_FILE_DIRECTORY: 'public://thumbnails/'
+    THUMBNAIL_BASE_PATH: 'https://peertube-dev-01.library.pitt.edu'
+    JPG: '.jpg'
+
+
+process:
+
+  thumbnail_path:
+    plugin: peertube_jpg
+    source: field_media_oembed_video
+  
+  destination_file_name:
+    plugin: concat
+    source:
+      - name
+      - constants/JPG
+  
+  source_uri:
+    -
+      plugin: concat
+      source:
+        - constants/THUMBNAIL_BASE_PATH
+        - '@thumbnail_path'
+    -
+      plugin: urlencode
+    - 
+      plugin: log
+  
+  destination_uri:
+    -
+      plugin: concat
+      source:
+        - constants/DRUPAL_FILE_DIRECTORY
+        - '@destination_file_name'
+    -
+      plugin: urlencode
+    - 
+      plugin: log
+  
+  uri:
+    plugin: file_copy
+    source:
+      - '@source_uri'
+      - '@destination_uri'
+    file_exists: rename
+    move: FALSE
+
+
+destination: 
+  plugin: 'entity:file'
+
+migration_dependencies: null
