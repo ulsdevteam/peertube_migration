@@ -92,6 +92,11 @@ process:
     file_exists: rename
     move: FALSE
 
+  last_updated:
+    -
+      plugin:
+    -
+
 destination: 
   plugin: 'entity:file'
 

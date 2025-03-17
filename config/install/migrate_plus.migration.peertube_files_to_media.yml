@@ -76,6 +76,7 @@ process:
     -
       plugin: log
 
+
 destination:
   plugin: 'entity:media'
   default_bundle: file
