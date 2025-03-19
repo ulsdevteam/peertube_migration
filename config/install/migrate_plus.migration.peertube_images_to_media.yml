@@ -75,6 +75,24 @@ process:
       access_check: 0
     -
       plugin: log
+    
+    pseudo_destination_filename:
+      -
+        plugin: callback
+        callable: basename
+        source: name
+      -
+        plugin: log
+    
+    pseudo_destination_path:
+      -
+        plugin: concat
+        source:
+          - '@pseudo_destination_filename'
+      -
+        plugin: log
+    
+    name: '@pseudo_destination_path'
 
 
 destination:
