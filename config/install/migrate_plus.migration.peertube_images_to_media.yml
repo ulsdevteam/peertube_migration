@@ -41,6 +41,7 @@ source:
     source_base_path: 'https://136-142-230-92-digital.traefik.me/'
     DRUPAL_FILE_DIRECTORY: 'public://thumbnails/'
     media_use: 'Thumbnail Image'
+    JPG: '.jpg'
 
 process:
 
@@ -76,23 +77,27 @@ process:
     -
       plugin: log
     
-    pseudo_destination_filename:
-      -
-        plugin: callback
-        callable: basename
-        source: name
-      -
-        plugin: log
-    
-    pseudo_destination_path:
-      -
-        plugin: concat
-        source:
-          - '@pseudo_destination_filename'
-      -
-        plugin: log
-    
-    name: '@pseudo_destination_path'
+  pseudo_destination_filename:
+    -
+      plugin: concat
+      source:
+        -
+          plugin: callback
+          callable: basename
+          source: name
+        - constants/jpg
+    -
+      plugin: log
+  
+  pseudo_destination_path:
+    -
+      plugin: concat
+      source:
+        - '@pseudo_destination_filename'
+    -
+      plugin: log
+  
+  name: '@pseudo_destination_path'
 
 
 destination:
