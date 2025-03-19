@@ -81,10 +81,7 @@ process:
     -
       plugin: concat
       source:
-        -
-          plugin: callback
-          callable: basename
-          source: name
+        - name
         - constants/JPG
     -
       plugin: log
@@ -97,7 +94,12 @@ process:
     -
       plugin: log
   
-  name: '@pseudo_destination_path'
+  name: 
+    -
+      plugin: concat
+      source:
+        - name
+        - constants/JPG
 
 
 destination:
