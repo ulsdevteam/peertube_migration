@@ -85,7 +85,7 @@ process:
           plugin: callback
           callable: basename
           source: name
-        - constants/jpg
+        - constants/JPG
     -
       plugin: log
   
