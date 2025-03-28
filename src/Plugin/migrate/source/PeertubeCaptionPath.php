@@ -32,6 +32,7 @@ class PeertubeCaptionPath extends Json {
 
         foreach ($return as $r) {
             // grab video_id from return response
+            \Drupal::logger('json_source_plugin')->notice('response from json: ' . $r);
             $captions = $session->request('GET' , "/api/v1/videos/$r/captions");
             foreach ($captions as $c) {
                 $newreturn[] = ['peertube' => $c, 'media' => $r];
