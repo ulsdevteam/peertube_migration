@@ -51,8 +51,30 @@ class PeertubeAPI extends ProcessPluginBase {
     //get video caption link
     $response = $session->request('GET' , "/api/v1/videos/$video_id/captions");
 
+    // check if response has caption path 
+    if (isset($response['data']) && is_array($response['data'])) {
+      // add the links to an array
+      $caption_paths_and_languages = [];
+      foreach ($response['data'] as $caption) {
+
+        if(isset($caption['captionPath']) && isset($caption['language'])) {
+          $caption_paths_and_languages[] = [
+            'captionPath' => $caption['captionPath'],
+            'language_id' => $caption['language']['id'],
+          ];
+        }
+
+      }
+    }
+
+    // return array
+    return $caption_paths_and_languages;
+
+    // or return empty array
+    return [];
+
     // return ending of caption path
-    return $response['data'][0]['captionPath'];
+    // return $response['data'][0]['captionPath'];
   }
     
 }

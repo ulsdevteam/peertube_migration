@@ -51,51 +51,48 @@ source:
   
 process:
 
-  caption_path:
+  caption_data:
     -
       plugin: peertube_api
       source: field_media_oembed_video
 
-  destination_file_name:
-    plugin: concat
-    source:
-      - name
-      - constants/VTT
+  captions:
+    plugin: foreach
+    source: caption_data
+    process:
+      caption_path:
+        plugin: get
+        source: '@item.captionPath'
+      language_id:
+        plugin: get
+        source: '@item.language_id'
+      destination_file_name:
+        plugin: concat
+        source:
+          - name
+          - '-'
+          - '@language_id'
+          - constants/VTT
+      source_uri:
+        plugin: concat
+        source:
+          - constants/CAPTION_BASE_PATH
+          - '@caption_path'
+      destination_uri:
+        plugin: concat
+        source:
+          - constants/DRUPAL_FILE_DIRECTORY
+          - '@destination_file_name'
+      uri:
+        plugin: file_copy
+        source:
+          - '@source_uri'
+          - '@destination_uri'
+        file_exists: rename
+        move: FALSE
+      last_updated:
+        plugin: timestamp
 
-  source_uri:
-    -
-      plugin: concat
-      source:
-        - constants/CAPTION_BASE_PATH
-        - '@caption_path'
-    -
-      plugin: urlencode
-    - 
-      plugin: log
-  
-  destination_uri:
-    -
-      plugin: concat
-      source:
-        - constants/DRUPAL_FILE_DIRECTORY
-        - '@destination_file_name'
-    -
-      plugin: urlencode
-    - 
-      plugin: log
-  
-  uri:
-    plugin: file_copy
-    source:
-      - '@source_uri'
-      - '@destination_uri'
-    file_exists: rename
-    move: FALSE
-
-  last_updated:
-    -
-      plugin:
-    -
 
 destination: 
   plugin: 'entity:file'

@@ -41,40 +41,54 @@ source:
     source_base_path: 'https://136-142-230-92-digital.traefik.me/'
     DRUPAL_FILE_DIRECTORY: 'public://transcripts'
     media_use: 'Transcript'
+    VTT: '.vtt'
 
 process:
 
-  field_media_file/target_id:
-    plugin: migration_lookup
-    migration: peertube_video
-    source: id
+  caption_data:
+    plugin: peertube_api
+    source: field_media_oembed_video
 
-  thumbnail/target_id:
-    plugin: migration_lookup
-    migration: peertube_video
-    source: id
-  
-  field_media_use:
-    -
-      plugin: entity_lookup
-      source: constants/media_use
-      entity_type: taxonomy_term
-      value_key: name
-      bundle_key: vid
-      bundle: islandora_media_use
-    -
-      plugin: log
+  media_entities:
+    plugin: foreach
+    source: caption_data
+    process:
 
-  field_media_of: 
-    -
-      plugin: entity_lookup
-      entity_type: node
-      source: name
-      value_key: title
-      bundle: islandora_object
-      access_check: 0
-    -
-      plugin: log
+      file_name:
+        plugin: concat
+        source:
+          - name
+          - '-'
+          - '@item.language_id'
+          - constants/VTT
+        
+      field_media_file/target_id:
+        plugin: migration_lookup
+        migration: peertube_video
+        source: '@file_name'
+        no_stub: true
+      
+      field_media_use:
+        -
+          plugin: entity_lookup
+          source: constants/media_use
+          entity_type: taxonomy_term
+          value_key: name
+          bundle_key: vid
+          bundle: islandora_media_use
+        -
+          plugin: log
+      
+      field_media_of:
+        -
+          plugin: entity_lookup
+          entity_type: node
+          source: name
+          value_key: title
+          bundle: islandora_object
+          access_check: 0
+        -
+          plugin: log
 
 
 destination:
