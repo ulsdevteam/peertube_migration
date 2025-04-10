@@ -1,3 +1,4 @@
+uuid: 5a1b2ed2-1d15-492a-b06a-8362d5a6ee72
 id: peertube_files_to_media
 migration_tags:
   - files
@@ -50,7 +51,7 @@ process:
     source: field_media_oembed_video
 
   media_entities:
-    plugin: foreach
+    plugin: sub_process
     source: caption_data
     process:
 

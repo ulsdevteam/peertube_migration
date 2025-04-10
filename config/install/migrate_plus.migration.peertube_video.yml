@@ -1,3 +1,4 @@
+uuid: fc78b803-a38d-4231-9de2-d6f342823917
 langcode: en
 status: true
 dependencies: { }
@@ -55,9 +56,11 @@ process:
     -
       plugin: peertube_api
       source: field_media_oembed_video
+    -
+      plugin: log
 
-  captions:
-    plugin: foreach
+  uri:
+    plugin: sub_process
     source: caption_data
     process:
       caption_path:
