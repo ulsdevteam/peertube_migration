@@ -90,6 +90,12 @@ process:
           move: FALSE
         -
           plugin: log
+    
+  uri: 
+    -
+      plugin: extract
+      source: '@construct_url'
+      index: uri
 
 
 
