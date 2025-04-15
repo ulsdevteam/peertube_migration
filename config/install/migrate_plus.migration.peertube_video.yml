@@ -91,6 +91,8 @@ process:
             - constants/CAPTION_BASE_PATH
             - captionPath
         -
+          plugin: urlencode
+        -
           plugin: log
   
       destination_uri:
@@ -99,6 +101,8 @@ process:
           source:
             - constants/DRUPAL_FILE_DIRECTORY
             - '@destination_file_name'
+        -
+          plugin: urlencode
         -
           plugin: log
 
