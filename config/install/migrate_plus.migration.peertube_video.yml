@@ -65,29 +65,45 @@ process:
     key: '@uri'
     process:
       destination_file_name:
-        plugin: concat
-        source:
-          - name
-          - '-'
-          - language_id
-          - constants/VTT
+        -
+          plugin: concat
+          source:
+            - name
+            - '-'
+            - language_id
+            - constants/VTT
+        -
+          plugin: log
+
       source_uri:
-        plugin: concat
-        source:
-          - constants/CAPTION_BASE_PATH
-          - captionPath
+        -
+          plugin: concat
+          source:
+            - constants/CAPTION_BASE_PATH
+            - captionPath
+        -
+          plugin: log
+  
       destination_uri:
-        plugin: concat
-        source:
-          - constants/DRUPAL_FILE_DIRECTORY
-          - '@destination_file_name'
+        -
+          plugin: concat
+          source:
+            - constants/DRUPAL_FILE_DIRECTORY
+            - '@destination_file_name'
+        -
+          plugin: log
+
       uri:
-        plugin: file_copy
-        source:
-          - '@source_uri'
-          - '@destination_uri'
-        file_exists: rename
-        move: FALSE
+        -
+          plugin: file_copy
+          source:
+            - '@source_uri'
+            - '@destination_uri'
+          file_exists: rename
+          move: FALSE
+        -
+          plugin: log
+          
       last_updated:
         plugin: timestamp
 
