@@ -69,8 +69,10 @@ process:
         -
           plugin: concat
           source: 
-            - name
-            - constants/VTT
+            - 
+              plugin: get
+              source: name
+            - .vtt
         -
           plugin: log
       
