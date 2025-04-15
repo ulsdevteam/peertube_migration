@@ -59,6 +59,16 @@ process:
     -
       plugin: log
 
+  file_name:
+    -
+      plugin: concat
+      source:
+        - name
+        - constants/VTT
+    -
+      plugin: log
+  
+
   construct_uri:
     plugin: sub_process
     source: '@caption_data'
@@ -68,10 +78,9 @@ process:
         -
           plugin: concat
           source:
-            - name
-            - '-'
             - language_id
-            - constants/VTT
+            - '@file_name'
+          delimiter: -
         -
           plugin: log
 
