@@ -64,24 +64,18 @@ process:
     source: caption_data
     key: '@uri'
     process:
-      caption_path:
-        plugin: get
-        source: captionPath
-      language_id:
-        plugin: get
-        source: language_id
       destination_file_name:
         plugin: concat
         source:
           - name
           - '-'
-          - '@language_id'
+          - language_id
           - constants/VTT
       source_uri:
         plugin: concat
         source:
           - constants/CAPTION_BASE_PATH
-          - '@caption_path'
+          - captionPath
       destination_uri:
         plugin: concat
         source:
