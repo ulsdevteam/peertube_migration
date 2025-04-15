@@ -65,46 +65,18 @@ process:
     source: '@caption_data'
     key: '@uri'
     process:
-      file_name:
-        -
-          plugin: concat
-          source: 
-            - 
-              plugin: get
-              source: name
-            - .vtt
-        -
-          plugin: log
-      
-      destination_file_name:
-        -
-          plugin: concat
-          source:
-            - language_id
-            - '@file_name'
-          delimiter: -
-        -
-          plugin: log
 
       source_uri:
         -
-          plugin: concat
-          source:
-            - constants/CAPTION_BASE_PATH
-            - captionPath
-        -
           plugin: urlencode
+          source: captionPath
         -
           plugin: log
   
       destination_uri:
         -
-          plugin: concat
-          source:
-            - constants/DRUPAL_FILE_DIRECTORY
-            - '@destination_file_name'
-        -
           plugin: urlencode
+          source: language_id
         -
           plugin: log
 
