@@ -61,7 +61,7 @@ process:
 
   construct_uri:
     plugin: sub_process
-    source: caption_data
+    source: '@caption_data'
     key: '@uri'
     process:
       destination_file_name:
@@ -103,7 +103,7 @@ process:
           move: FALSE
         -
           plugin: log
-          
+
       last_updated:
         plugin: timestamp
 
