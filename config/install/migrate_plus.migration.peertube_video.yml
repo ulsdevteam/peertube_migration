@@ -66,10 +66,10 @@ process:
     process:
       caption_path:
         plugin: get
-        source: '@item.captionPath'
+        source: captionPath
       language_id:
         plugin: get
-        source: '@item.language_id'
+        source: language_id
       destination_file_name:
         plugin: concat
         source:
