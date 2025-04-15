@@ -58,15 +58,6 @@ process:
       source: field_media_oembed_video
     -
       plugin: log
-
-  file_name:
-    -
-      plugin: concat
-      source:
-        - name
-        - constants/VTT
-    -
-      plugin: log
   
 
   construct_uri:
@@ -74,6 +65,15 @@ process:
     source: '@caption_data'
     key: '@uri'
     process:
+      file_name:
+        -
+          plugin: concat
+          source: 
+            - name
+            - constants/VTT
+        -
+          plugin: log
+      
       destination_file_name:
         -
           plugin: concat
