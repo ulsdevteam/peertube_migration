@@ -62,7 +62,7 @@ process:
   uri:
     plugin: sub_process
     source: caption_data
-    key: "@uri"
+    key: '@uri'
     process:
       caption_path:
         plugin: get
