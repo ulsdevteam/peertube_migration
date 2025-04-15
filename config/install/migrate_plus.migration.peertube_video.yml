@@ -59,7 +59,7 @@ process:
     -
       plugin: log
 
-  uri:
+  construct_uri:
     plugin: sub_process
     source: caption_data
     key: '@uri'
