@@ -51,9 +51,9 @@ class PeerTubeSource extends Url {
       foreach ($captions as $caption) {
         $caption_rows[] = [
           'video_id' => $video_id,
-          'caption_url' => $caption['captionPath'] ?? '',
-          'language_id' => $caption['language']['id'] ?? '',
-          'caption_name' => $caption['language']['label'] ?? '',
+          'caption_url' => $caption['captionPath'],
+          'language_id' => $caption['language_id'],
+          'vtt_path' => $caption['vtt_path'],
           'original_media_id' => $video_row['id'],
         ];
       }
