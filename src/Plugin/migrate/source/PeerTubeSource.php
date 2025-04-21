@@ -45,16 +45,22 @@ class PeerTubeSource extends Url {
         continue;
       }
 
+      $video_name = $video_row['attributes']['name'] ?? NULL;
+      if (!$video_name) {
+        continue;
+      }
+
+
       // Fetch captions from PeerTube API.
       $captions = $this->fetchPeerTubeCaptions($video_id);
 
       foreach ($captions as $caption) {
         $caption_rows[] = [
           'video_id' => $video_id,
+          'video_name' => $video_name,
           'caption_url' => $caption['captionPath'],
           'language_id' => $caption['language_id'],
           'vtt_path' => $caption['vtt_path'],
-          'original_media_id' => $video_row['id'],
         ];
       }
     }
