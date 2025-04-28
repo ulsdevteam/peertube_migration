@@ -71,38 +71,38 @@ class PeerTubeSource extends Url {
   protected function fetchPeerTubeCaptions($video_id) {
 
    // make a request to peertube API
-   $session = \Drupal::service('peertube_migration.peertube_migration_session');
-   try {
-    // Get captions
-    $response = $session->request('GET', "/api/v1/videos/$video_id/captions");
-    $data = json_decode($response->getBody(), TRUE);
+    $session = \Drupal::service('peertube_migration.peertube_migration_session');
+    try {
+      // Get captions
+      $response = $session->request('GET', "/api/v1/videos/$video_id/captions");
+      $data = json_decode($response->getBody(), TRUE);
 
-    // Get video name?
-    // $name_response = $session->request('GET', "/api/v1/videos/$video_id");
+      // Get video name?
+      // $name_response = $session->request('GET', "/api/v1/videos/$video_id");
 
-    $caption_rows = [];
+      $caption_rows = [];
 
-    if (isset($data['data']) && is_array($data['data'])) {
-      foreach ($data['data'] as $caption) {
-        if (isset($caption['captionPath'], $caption['language']['id'])) {
-          $full_caption_path = 'https://peertube-dev-01.library.pitt.edu' . $caption['captionPath'];
-          $full_vtt_path = 'public://transcripts/' . $video_id . $caption['language']['id'] . '.vtt';
+      if (isset($data['data']) && is_array($data['data'])) {
+        foreach ($data['data'] as $caption) {
+          if (isset($caption['captionPath'], $caption['language']['id'])) {
+            $full_caption_path = 'https://peertube-dev-01.library.pitt.edu' . $caption['captionPath'];
+            $full_vtt_path = 'public://transcripts/' . $video_id . $caption['language']['id'] . '.vtt';
 
-          $caption_rows[] = [
-            'captionPath' => $full_caption_path,
-            'language_id' => $caption['language']['id'],
-            'vtt_path' => $full_vtt_path,
-          ];
+            $caption_rows[] = [
+              'captionPath' => $full_caption_path,
+              'language_id' => $caption['language']['id'],
+              'vtt_path' => $full_vtt_path,
+            ];
+          }
         }
       }
-    }
 
-    return $caption_rows;
-  }
-  catch (\Exception $e) {
-    \Drupal::logger('peertube_caption_migration')->error("Failed to fetch captions for video $video_id: " . $e->getMessage());
-    return [];
-  }
+      return $caption_rows;
+    }
+    catch (\Exception $e) {
+      \Drupal::logger('peertube_caption_migration')->error("Failed to fetch captions for video $video_id: " . $e->getMessage());
+      return [];
+    }
 
   }
 
@@ -123,15 +123,4 @@ class PeerTubeSource extends Url {
       'vtt_path' => $this->t('Full vtt path'),
     ];
   }
-}
-
-
-
-
-
-
-
-
-
-
 }
