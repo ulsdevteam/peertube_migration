@@ -120,6 +120,7 @@ class PeerTubeSource extends Url {
       'caption_path' => $this->t('Caption file URL path'),
       'language_id' => $this->t('Caption language ID'),
       'video_name' => $this->t('Remote Media entity name'),
+      'vtt_path' => $this->t('Full vtt path'),
     ];
   }
 }

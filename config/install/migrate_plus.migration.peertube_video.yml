@@ -12,7 +12,7 @@ migration_group: islandora
 label: 'importing caption .vtt files from peertube'
 
 source:
-  plugin: url
+  plugin: peertube_source
   data_fetcher_plugin: http
   data_parser_plugin: json
   urls: https://136-142-230-92-digital.traefik.me/jsonapi/media/remote_video?filter[uid.name][value]=emv38
@@ -52,52 +52,33 @@ source:
   
 process:
 
-  caption_data:
+  video_id: video_id
+  video_name: video_name
+
+  source_uri:
     -
-      plugin: peertube_api
-      source: field_media_oembed_video
+      plugin: urlencode
+      source: caption_url
+    -
+      plugin: log
+
+  destination_uri:
+    -
+      plugin: urlencode
+      source: vtt_path
     -
       plugin: log
   
-
-  construct_uri:
-    plugin: sub_process
-    source: '@caption_data'
-    key: '@uri'
-    process:
-
-      source_uri:
-        -
-          plugin: urlencode
-          source: captionPath
-        -
-          plugin: log
-  
-      destination_uri:
-        -
-          plugin: urlencode
-          source: language_id
-        -
-          plugin: log
-
-      uri:
-        -
-          plugin: file_copy
-          source:
-            - '@source_uri'
-            - '@destination_uri'
-          file_exists: rename
-          move: FALSE
-        -
-          plugin: log
-    
-  uri: 
+  uri:
     -
-      plugin: extract
-      source: '@construct_url'
-      index: uri
-
-
+      plugin: file_copy
+      source:
+        - '@source_uri'
+        - '@destination_uri'
+      file_exists: rename
+      move: FALSE
+    -
+      plugin: log
 
 
 destination: 
