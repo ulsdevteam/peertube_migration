@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\archivesspace\Plugin\migrate\source;
+namespace Drupal\peertube_migration\Plugin\migrate\source;
 
 use Drupal\migrate_plus\Plugin\migrate\source\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
