@@ -9,7 +9,7 @@ source:
   plugin: url
   data_fetcher_plugin: http
   data_parser_plugin: json
-  urls: https://136-142-230-92-digital.traefik.me/jsonapi/media/remote_video?filter[uid.name][value]=emv38
+  urls: https://136-142-230-92-digital.review.born-digital.dev/jsonapi/media/remote_video?filter[uid.name][value]=emv38
 
   item_selector: data/
   fields:
@@ -39,7 +39,7 @@ source:
       type: string
 
   constants:
-    source_base_path: 'https://136-142-230-92-digital.traefik.me/'
+    source_base_path: 'https://136-142-230-92-digital.review.born-digital.dev/'
     DRUPAL_FILE_DIRECTORY: 'public://transcripts'
     media_use: 'Transcript'
     VTT: '.vtt'
