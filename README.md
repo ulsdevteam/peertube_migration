@@ -17,7 +17,7 @@ uses two migration yml files in that order
 
 the first migration creates the file entity and places it into the drupal public directory, and the second migration creats an caption file media entity for that file and adds a relationship to the original remote video the caption file is referencing
 
-##migration flow for thumbnail 
+## migration flow for thumbnail 
 
 ### first half:
 
