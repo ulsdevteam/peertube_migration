@@ -38,4 +38,14 @@ the first migration creates the file entity and places it into the drupal public
   * uri is the only required process item for migrating file entities
 
   - destination is an 'entity:file'
+ 
+  ### second half:
+  - chained migration that creates media entity and references it to previously created file
+  - source plugin: url (same as first half)
+  - process plugins:
+      - referencing field_media_of: to remote video node id
+      - referencing field_media_use: thumbnail or transcript
+  - destination is 'entity:media'
+
+  
 
